@@ -38,18 +38,51 @@ namespace TechJobsConsole
             return values;
         }
 
-        public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
+
+        //asdf new content
+
+        public static List<Dictionary<string, string>> FindByValue(string searchTerm)
         {
             // load data, if not already loaded
             LoadData();
 
+            searchTerm = searchTerm.ToLower();
+            List<Dictionary<string, string>> matchingItems = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> setOfJobDetails in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> singleLine in setOfJobDetails)
+                {
+
+                    if (singleLine.Value.ToLower().Contains(searchTerm))
+                    {
+                        matchingItems.Add(setOfJobDetails);
+                        //need something here to prevent duplicate entries
+                        //try break, continue, do-while, counter
+                        break;
+                    }
+                }
+            }
+
+            return matchingItems;
+        }
+
+
+
+        public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
+        {
+            // load data, if not already loaded
+            LoadData();
             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            //asdf new content
+            value = value.ToLower();
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
 
-                if (aValue.Contains(value))
+                string aValue = row[column];
+                if (aValue.ToLower().Contains(value))
                 {
                     jobs.Add(row);
                 }

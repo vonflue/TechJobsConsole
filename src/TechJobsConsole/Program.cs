@@ -15,6 +15,7 @@ namespace TechJobsConsole
             actionChoices.Add("list", "List");
 
             // Column options
+            ///asdf new content here
             Dictionary<string, string> columnChoices = new Dictionary<string, string>();
             columnChoices.Add("core competency", "Skill");
             columnChoices.Add("employer", "Employer");
@@ -63,7 +64,10 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        //Console.WriteLine("Search all fields not yet implemented.");
+                        //asdf new content here
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -118,7 +122,31 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            //Console.WriteLine("printJobs is not implemented yet");
+            
+
+            if (someJobs.Count.Equals(0))
+            {
+                Console.WriteLine("Sorry, I found no results.");
+            }
+            else
+            {
+
+                //loops through the dictionaries
+                foreach (Dictionary<string, string> outerLoopJobs in someJobs)
+                {
+                    //displays row of asterisks to make each set easier to read
+                    Console.WriteLine("*****");
+                    //loops through each key/value pair in that dictionary
+                    foreach (KeyValuePair<string, string> innerLoopJob in outerLoopJobs)
+                    {
+                        //displays key/value in that dictionary
+                        Console.WriteLine("{0}: {1}", innerLoopJob.Key, innerLoopJob.Value);
+                    }
+                    //displays another row of asterisks to make each set easier to read
+                    Console.WriteLine("*****");
+                }
+            }
         }
     }
 }
